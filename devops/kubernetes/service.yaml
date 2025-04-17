@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-redteam-backend
+  labels:
+    app: ai-redteam
+    tier: backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  selector:
+    app: ai-redteam
+    tier: backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-redteam-frontend
+  labels:
+    app: ai-redteam
+    tier: frontend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: ai-redteam
+    tier: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-redteam-postgres
+  labels:
+    app: ai-redteam
+    tier: database
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+    protocol: TCP
+  selector:
+    app: ai-redteam
+    tier: database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-redteam-redis
+  labels:
+    app: ai-redteam
+    tier: cache
+spec:
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+  selector:
+    app: ai-redteam
+    tier: cache
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ai-redteam-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+spec:
+  tls:
+  - hosts:
+    - ai-redteam.example.com
+    - api.ai-redteam.example.com
+    secretName: ai-redteam-tls
+  rules:
+  - host: ai-redteam.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ai-redteam-frontend
+            port:
+              number: 80
+  - host: api.ai-redteam.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ai-redteam-backend
+            port:
+              number: 8000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: gp2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: gp2 

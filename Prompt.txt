@@ -1,0 +1,118 @@
+⚔️ AI Red Team Security WebApp – Cursor Copycoder Prompt (Supercharged)
+🚨 Generate a production-ready, full-stack GitHub repository for an AI-Powered Red Team Security WebApp that simulates adversarial offensive operations using machine learning, cybersecurity tools, and ethical hacking frameworks. This application is intended for cyber range environments, penetration testing labs, and red team training platforms.
+
+🧠 Key AI-Powered Modules
+AI Threat Simulation Engine
+
+NLP-based phishing simulation
+
+AI-powered brute-force/malware emulation
+
+GPT-driven attack scenario auto-generation
+
+Payload Creator & Launcher
+
+Generate and simulate payloads (Python, PowerShell, Bash)
+
+Test payloads in sandboxed containers
+
+C2 & Recon Dashboard
+
+Simulated command-and-control terminal
+
+AI-enhanced Nmap/Shodan-style network scanning
+
+Scenario Builder UI
+
+Drag-and-drop offensive workflows (like Metasploit GUI)
+
+Automated Reporting System
+
+CVSS-based scoring, MITRE ATT&CK matrix, and PDF/HTML reports
+
+🧰 Technology Stack
+Frontend: React + TailwindCSS + Framer Motion
+
+Backend: FastAPI (Python)
+
+AI/ML: GPT (OpenAI API), Scikit-learn, TensorFlow
+
+Database: PostgreSQL + Redis
+
+Auth: JWT + Role-Based Access Control (RBAC)
+
+DevOps: Docker, Kubernetes, Terraform (for AWS/GCP)
+
+Security: Follows OWASP Top 10 + sandboxed attack simulation
+
+📁 GitHub Repository Structure
+bash
+Copy
+Edit
+ai-redteam-security-webapp/
+├── .github/                         # GitHub Actions CI/CD workflows
+│   └── workflows/
+│       └── deploy.yml
+├── backend/                         # FastAPI backend
+│   ├── app/
+│   │   ├── api/                     # API endpoints
+│   │   ├── core/                    # Core configs and settings
+│   │   ├── models/                  # Pydantic and DB models
+│   │   ├── services/                # Business logic + ML integrations
+│   │   ├── utils/                   # Utility functions
+│   │   └── main.py                  # FastAPI entrypoint
+│   ├── tests/                       # Backend unit/integration tests
+│   └── requirements.txt
+├── frontend/                        # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/               # Axios/API handlers
+│   │   ├── context/                # Auth & global state
+│   │   └── App.tsx
+│   ├── tailwind.config.js
+│   └── package.json
+├── ai_models/                       # AI/ML models & scripts
+│   ├── phishing_simulation/
+│   ├── payload_generator/
+│   ├── recon_ai_mapper/
+│   └── model_training.ipynb
+├── database/
+│   ├── init.sql                     # DB schema
+│   └── seeds.sql                    # Sample data
+├── devops/                          # Deployment configs
+│   ├── docker/
+│   │   ├── backend.Dockerfile
+│   │   ├── frontend.Dockerfile
+│   ├── kubernetes/
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   ├── terraform/                   # Infrastructure-as-code (AWS)
+│   │   └── main.tf
+├── docs/
+│   ├── architecture.md
+│   ├── api_schema.yaml              # OpenAPI/Swagger
+│   └── user_manual.md
+├── .env.example
+├── docker-compose.yml
+├── LICENSE
+├── README.md
+└── CHANGELOG.md
+✅ Expected Output from Cursor
+All frontend/backend files, components, and services populated
+
+AI/ML model scripts using OpenAI and other libraries
+
+Working API endpoints with Swagger docs
+
+Full RBAC-auth integration (admin/red teamer/viewer)
+
+Network scanner and simulated attack runner modules
+
+Fully responsive dashboard UI
+
+Dockerized environment with Kubernetes manifests and Terraform setup
+
+CI/CD GitHub Action workflows for auto-deploy to AWS or GCP
+

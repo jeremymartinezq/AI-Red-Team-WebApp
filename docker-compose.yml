@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../devops/docker/frontend.Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api
+      - NODE_ENV=development
+    networks:
+      - ai-redteam-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../devops/docker/backend.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/ai_redteam
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - ENVIRONMENT=development
+    networks:
+      - ai-redteam-network
+
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ai_redteam
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ai-redteam-network
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ai-redteam-network
+
+  jupyter:
+    build:
+      context: ./ai_models
+      dockerfile: ../devops/docker/jupyter.Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./ai_models:/notebooks
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    networks:
+      - ai-redteam-network
+
+networks:
+  ai-redteam-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data: 

@@ -1,5 +1,8 @@
 # Dependencies
 node_modules/
+**/node_modules/
+node_modules/.cache/
+**/node_modules/.cache/
 .pnp/
 .pnp.js
 
@@ -23,6 +26,8 @@ out/
 .npm/
 .eslintcache
 *.tsbuildinfo
+**/.cache/
+**/default-development/*.pack
 
 # Logs
 logs/

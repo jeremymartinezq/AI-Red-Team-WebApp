@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+.cache/
+**/.cache/
+**/default-development/
+*.pack
+
+# Build files
+build/
+dist/ 

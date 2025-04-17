@@ -1,46 +1,71 @@
 # Dependencies
 node_modules/
-/.pnp
+.pnp/
 .pnp.js
 
 # Testing
-/coverage
+coverage/
 
 # Production
-/build
-/dist
+build/
+dist/
+out/
 
-# Misc
-.DS_Store
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+*.tsbuildinfo
+
+# Logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# IDE
+# Editor directories and files
 .idea/
 .vscode/
-*.swp
-*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-.env
-.python-version
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+*.egg-info/
+*.egg
 
 # Docker
 .docker/
+
+# Jupyter
+.ipynb_checkpoints/
 
 # Terraform
 .terraform/
 *.tfstate
 *.tfstate.backup
-*.tfplan 
+*.tfplan
+
+# Kubernetes
+kubeconfig 
